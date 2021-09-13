@@ -84,7 +84,7 @@ document.addEventListener('click', e=>{
     // if( e.target.classList[0] !='cal' && e.target.classList[0] !='payProd'  && e.target.classList[0] !='info' && e.target.id !='totalProd' && e.target.classList[0] !='plusCart' &&  e.target.classList[0] !='minusCart' && e.target.classList[0] !='deleteC' && e.target.classList[0] !='prodImg' && e.target.classList[0] !='carts' && e.target.classList[1] !='fa-shopping-cart' && e.target.classList[0] !='shopMob'  | e.target.classList[0]==='close' ) {
     //     carts.classList.add('hidden')
     // } product_info
-    console.log(e.target.classList[0])
+  
     if(e.target.classList[0]=='close' || e.target.id=='product' || e.target.id=='product_info'|| e.target.classList[0]=='btnCards' || e.target.classList[0]=='imgclick') {
         carts.classList.add('hidden')
     } 

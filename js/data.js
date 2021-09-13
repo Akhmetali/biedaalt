@@ -1,14 +1,20 @@
 let prods = [];
 
+
+
+var request = new XMLHttpRequest();
+request.open("GET", "../data/products.json", false);
+request.send(null)
+const data = JSON.parse(request.responseText);
+
+
+
 function proddata(catname){
     let cat=catname;
     const product = document.querySelector('#product')
-    let l=0;
-    fetch('../data/products.json')
-    .then(res=>res.json())
-    .then(results=>{  
+    let l=0;  
         product.innerHTML="";
-        let currentData = results.filter(el => el.category === cat)    
+        let currentData = data.filter(el => el.category === cat)    
         currentData.forEach(el => {
             prods.push(el)  
             let title = el.title;
@@ -45,7 +51,7 @@ function proddata(catname){
                   </select>                
             </div>         
     `)
-    })
+    
 }
 
 
@@ -150,10 +156,8 @@ const prodModal = document.querySelector('.prodModal');
 document.addEventListener('click',e=>{
     if(e.target.classList[0] == 'imgclick') {
         prodModal.classList.remove('hidden')
-        fetch('../data/products.json')
-        .then(res=>res.json())
-        .then(results=>{  
-        let curId = results.find(el=>el.id==e.target.id)
+   
+        let curId = data.find(el=>el.id==e.target.id)
         
         prodModal.innerHTML= `
         <div class="imgcontainer bg-white w-4/5 md:w-2/5 h-3/5 rounded-xl">              
@@ -176,9 +180,8 @@ document.addEventListener('click',e=>{
             </div>  
         `
         findText.classList.add('hidden');
-    })
+  
     }
-
 })
 
 document.addEventListener('click',e=>{
@@ -193,17 +196,12 @@ const findText = document.querySelector('.findText');
 search.addEventListener('input', updateValue);
 function updateValue(e) {      
     if(e.target.value !='') {
-        findText.classList.remove('hidden');
-        fetch('../data/products.json')
-        .then(res=>res.json())
-        .then(results=>{   
-            for(var i = 0; i < results.length; i++){          
-                if(results[i].title.indexOf(e.target.value) != -1){               
-                    curtext = `<p id="${results[i].id}" class="imgclick">${results[i].title}</p>`}
-            }       
-            findText.innerHTML =curtext; 
-         })  
-         
+        findText.classList.remove('hidden');      
+        for(var i = 0; i < data.length; i++){          
+            if(data[i].title.indexOf(e.target.value) != -1){               
+                curtext = `<p id="${data[i].id}" class="imgclick">${data[i].title}</p>`}
+        }       
+        findText.innerHTML =curtext;    
 
     } else {        
         let curtext ='';

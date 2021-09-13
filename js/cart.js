@@ -1,3 +1,4 @@
+
 if(localStorage['userIn']) {  
 class Card {
     constructor(userId,productTitle,productImg,productId, price,total,changePrice){
@@ -40,10 +41,8 @@ document.addEventListener('click', e=>{
         if(!localStorage['userIn']) {
             location.href = "http://127.0.0.1:5500/login.html"
         }     
-        fetch('../data/products.json')
-        .then(res=>res.json())
-        .then(results=>{   
-        let pp = results.find(el=>el.id==e.target.id)      
+          
+        let pp = data.find(el=>el.id==e.target.id)      
         const ccds = new Card(            
             JSON.parse(localStorage['userIn']).id,
             pp.title,
@@ -62,7 +61,7 @@ document.addEventListener('click', e=>{
             type: "success",
             timer: 1000
             });
-        })
+        
        
                        
     }
